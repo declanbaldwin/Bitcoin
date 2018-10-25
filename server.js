@@ -10,12 +10,25 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('index');
+    Post.find({}).then((posts) => {
+        res.render('index', {
+            posts: posts
+        });
+    }).catch((error) => {
+        res.status(404).send(error);
+    });
 });
 
 app.post('/newPost', (req, res) => {
     console.log('newPost');
-    response.redirect('/');
+    console.log(JSON.stringify(req.body));
+
+    let post = new Post(req.body);
+    post.save().then((doc) => {
+        res.send(doc);
+    }).catch((error) => {
+        res.status(404).send(error);
+    })
 });
 
 app.listen(port, () => {

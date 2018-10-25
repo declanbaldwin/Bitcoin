@@ -5,9 +5,10 @@ var postSchema = new Schema({
     title: String,
     author: String,
     body: String,
-    createdAt: Date
+    createdAt: Date,
+    score: Number
 });
 
-var Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', postSchema);
 
-module.exports = Post;
+module.exports = { Post };
