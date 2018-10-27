@@ -18,6 +18,8 @@ nav {
     min-height: 56px;
     padding-left: 10px;
     padding-right: 10px;
+    position: fixed;
+    width: 100%;
 }
 
 nav div {
@@ -66,19 +68,9 @@ nav div {
     border: 2px solid #444444;
 }
 
-.addTopicButton {
-    background-color: #ffffff;
-    border: 2px solid #ffffff;
-    padding: 10px 10px;
-    height: 38px;
-    font-size: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
 main {
     display: flex;
+    padding-top: 56px;
 }
 
 aside {
@@ -87,7 +79,7 @@ aside {
     flex: 1;
 }
 
-.posts {
+.postsSection {
     flex: 3;
 }
 
@@ -110,9 +102,10 @@ aside {
     background-color: #ffffff;
     color: #444444;
     border-left: 3px solid #f79413;
+    cursor: pointer;
 }
 
-.postsHeader {
+.postsSectionHeader {
     display: flex;
     min-height: 100px;
     align-items: center;
@@ -132,36 +125,40 @@ aside {
     border-radius: 6px;
 }
 
-.factsContainer {
+.factsPostsContainer, .opinionsPostsContainer, .experiencesPostsContainer {
     margin-left: 20px;
     background-color: #ffffff;
     width: 75%;
     box-shadow: 0 0 5px;
 }
 
-.factsHeader {
+.opinionsPostsContainer, .experiencesPostsContainer {
+    display: none;
+}
+
+.postsHeader {
     font-size: 1.25rem;
     padding: 1.25rem;
 }
 
-.facts {
+.posts {
     display: flex;
     border-top: 1px solid #c4c4c4;
     border-bottom: 1px solid #c4c4c4;
     padding: 1.25rem;
 }
 
-.factBody {
+.postsBody {
     flex: 3;
 }
 
-.factInfo {
+.postsInfo {
     font-size: 0.75rem;
     margin-top: 1rem;
     color: #afafaf;
 }
 
-.factScore {
+.postsScore {
     flex: 1;
     text-align: center;
     display: flex;

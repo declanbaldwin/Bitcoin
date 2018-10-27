@@ -19,10 +19,7 @@
         </div>
         <div class="centre">
             <div class="search">
-                <input type="text" name="search" placeholder="Search Topics">
-            </div>
-            <div class="addTopic">
-                <button class="addTopicButton" type="button"><span>+ New Topic</span></button>
+                <input type="text" name="search" placeholder="Search...">
             </div>
         </div>
         <div class="signIn">
@@ -37,31 +34,34 @@
                     <div>Facts</div>
                     <div>Opinions</div>
                     <div>Experiences</div>
+                    <div>Graph</div>
                 </div>
             </div>
         </aside>
-        <section class="posts">
-            <div class="postsHeader">
+        <section class="postsSection">
+            <div class="postsSectionHeader">
                 <div class="New Post">
                     <button class="newPostButton" type="button"><span>New Post</span></button>
                 </div>
             </div>
-            <div class="factsContainer">
-                <div class="factsHeader">Facts</div>
-                <% posts.forEach( function( posts ){ %>
-                <div class="facts">
-                    <div class="factBody">
+            <div class="factsPostsContainer">
+                <div class="postsHeader">Facts</div>
+                <% posts.forEach( function( posts ){ 
+                    if(posts.postType !== "fact") return;
+                %>
+                <div class="posts">
+                    <div class="postsBody">
                         <p>
                             <%= posts.body %>
                         </p>
-                        <div class="factInfo">
+                        <div class="postsInfo">
                             <span>
                                 <%= posts.author %> -
                                 <%= posts.createdAt.toLocaleDateString("en-US") %>
                             </span>
                         </div>
                     </div>
-                    <div class="factScore">
+                    <div class="postsScore">
                         <div class="upArrow">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
                                 <g>
@@ -83,10 +83,90 @@
                 </div>
                 <% }); %>
             </div>
+
+            <div class="opinionsPostsContainer">
+                    <div class="postsHeader">Opinion</div>
+                    <% posts.forEach( function( posts ){ 
+                        if(posts.postType !== "opinion") return;
+                    %>
+                    <div class="posts">
+                        <div class="postsBody">
+                            <p>
+                                <%= posts.body %>
+                            </p>
+                            <div class="postsInfo">
+                                <span>
+                                    <%= posts.author %> -
+                                    <%= posts.createdAt.toLocaleDateString("en-US") %>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="postsScore">
+                            <div class="upArrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                    <g>
+                                        <path d="M1 8h10L6 3 1 8" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <p>
+                                <%= posts.score %>
+                            </p>
+                            <div class="downArrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                    <g>
+                                        <path d="M1 4h10L6 9 1 4" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+
+                <div class="experiencesPostsContainer">
+                        <div class="postsHeader">Experiences</div>
+                        <% posts.forEach( function( posts ){ 
+                            if(posts.postType !== "experience") return;
+                        %>
+                        <div class="posts">
+                            <div class="postsBody">
+                                <p>
+                                    <%= posts.body %>
+                                </p>
+                                <div class="postsInfo">
+                                    <span>
+                                        <%= posts.author %> -
+                                        <%= posts.createdAt.toLocaleDateString("en-US") %>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="postsScore">
+                                <div class="upArrow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                        <g>
+                                            <path d="M1 8h10L6 3 1 8" />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <p>
+                                    <%= posts.score %>
+                                </p>
+                                <div class="downArrow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                        <g>
+                                            <path d="M1 4h10L6 9 1 4" />
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
         </section>
     </main>
     <footer>
     </footer>
 </body>
-
 </html>
+<script src="app.js"></script>

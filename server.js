@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/graph', (req, res) => {
+    res.render('graph');
+});
+
 app.post('/newPost', (req, res) => {
     console.log('newPost');
     console.log(JSON.stringify(req.body));
