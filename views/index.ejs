@@ -42,23 +42,46 @@
         </aside>
         <section class="posts">
             <div class="postsHeader">
-                <div class="shareTopic">
-                    <button class="shareTopicButton" type="button"><span>Share Topic</span></button>
-                </div>
                 <div class="New Post">
                     <button class="newPostButton" type="button"><span>New Post</span></button>
                 </div>
             </div>
             <div class="factsContainer">
                 <div class="factsHeader">Facts</div>
+                <% posts.forEach( function( posts ){ %>
                 <div class="facts">
                     <div class="factBody">
-                        <p><%= posts[0].body %></p>
+                        <p>
+                            <%= posts.body %>
+                        </p>
+                        <div class="factInfo">
+                            <span>
+                                <%= posts.author %> -
+                                <%= posts.createdAt.toLocaleDateString("en-US") %>
+                            </span>
+                        </div>
                     </div>
                     <div class="factScore">
-                        <p><%= posts[0].score %></p>
+                        <div class="upArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                <g>
+                                    <path d="M1 8h10L6 3 1 8" />
+                                </g>
+                            </svg>
+                        </div>
+                        <p>
+                            <%= posts.score %>
+                        </p>
+                        <div class="downArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                <g>
+                                    <path d="M1 4h10L6 9 1 4" />
+                                </g>
+                            </svg>
+                        </div>
                     </div>
                 </div>
+                <% }); %>
             </div>
         </section>
     </main>
