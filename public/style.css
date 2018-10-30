@@ -105,6 +105,12 @@ aside {
     cursor: pointer;
 }
 
+.fixedMenu .topics .selected {
+    background-color: #ffffff;
+    border-left: 3px solid #f79413;
+    color: #444444;
+}
+
 .postsSectionHeader {
     display: flex;
     min-height: 100px;
@@ -125,14 +131,14 @@ aside {
     border-radius: 6px;
 }
 
-.factsPostsContainer, .opinionsPostsContainer, .experiencesPostsContainer {
+.factsPostsContainer, .opinionsPostsContainer, .experiencesPostsContainer, .graphsPostsContainer {
     margin-left: 20px;
     background-color: #ffffff;
     width: 75%;
     box-shadow: 0 0 5px;
 }
 
-.opinionsPostsContainer, .experiencesPostsContainer {
+.opinionsPostsContainer, .experiencesPostsContainer, .graphsPostsContainer {
     display: none;
 }
 

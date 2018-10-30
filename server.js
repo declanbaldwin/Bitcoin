@@ -24,8 +24,6 @@ app.get('/graph', (req, res) => {
 });
 
 app.post('/newPost', (req, res) => {
-    console.log('newPost');
-    console.log(JSON.stringify(req.body));
     req.body.createdAt = new Date();
     let post = new Post(req.body);
     post.save().then((doc) => {

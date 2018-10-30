@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="jquery-3.3.1.js"></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
@@ -31,10 +32,10 @@
             <div class="fixedMenu">
                 <div class="title"><span>Bitcoin</span></div>
                 <div class="topics">
-                    <div>Facts</div>
-                    <div>Opinions</div>
-                    <div>Experiences</div>
-                    <div>Graph</div>
+                    <div id="factsTab">Facts</div>
+                    <div id="opinionsTab">Opinions</div>
+                    <div id="experiencesTab">Experiences</div>
+                    <div id="graphsTab">Graph</div>
                 </div>
             </div>
         </aside>
@@ -85,88 +86,93 @@
             </div>
 
             <div class="opinionsPostsContainer">
-                    <div class="postsHeader">Opinion</div>
-                    <% posts.forEach( function( posts ){ 
+                <div class="postsHeader">Opinion</div>
+                <% posts.forEach( function( posts ){ 
                         if(posts.postType !== "opinion") return;
                     %>
-                    <div class="posts">
-                        <div class="postsBody">
-                            <p>
-                                <%= posts.body %>
-                            </p>
-                            <div class="postsInfo">
-                                <span>
-                                    <%= posts.author %> -
-                                    <%= posts.createdAt.toLocaleDateString("en-US") %>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="postsScore">
-                            <div class="upArrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
-                                    <g>
-                                        <path d="M1 8h10L6 3 1 8" />
-                                    </g>
-                                </svg>
-                            </div>
-                            <p>
-                                <%= posts.score %>
-                            </p>
-                            <div class="downArrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
-                                    <g>
-                                        <path d="M1 4h10L6 9 1 4" />
-                                    </g>
-                                </svg>
-                            </div>
+                <div class="posts">
+                    <div class="postsBody">
+                        <p>
+                            <%= posts.body %>
+                        </p>
+                        <div class="postsInfo">
+                            <span>
+                                <%= posts.author %> -
+                                <%= posts.createdAt.toLocaleDateString("en-US") %>
+                            </span>
                         </div>
                     </div>
-                    <% }); %>
+                    <div class="postsScore">
+                        <div class="upArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                <g>
+                                    <path d="M1 8h10L6 3 1 8" />
+                                </g>
+                            </svg>
+                        </div>
+                        <p>
+                            <%= posts.score %>
+                        </p>
+                        <div class="downArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                <g>
+                                    <path d="M1 4h10L6 9 1 4" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
+                <% }); %>
+            </div>
 
-                <div class="experiencesPostsContainer">
-                        <div class="postsHeader">Experiences</div>
-                        <% posts.forEach( function( posts ){ 
+            <div class="experiencesPostsContainer">
+                <div class="postsHeader">Experiences</div>
+                <% posts.forEach( function( posts ){ 
                             if(posts.postType !== "experience") return;
                         %>
-                        <div class="posts">
-                            <div class="postsBody">
-                                <p>
-                                    <%= posts.body %>
-                                </p>
-                                <div class="postsInfo">
-                                    <span>
-                                        <%= posts.author %> -
-                                        <%= posts.createdAt.toLocaleDateString("en-US") %>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="postsScore">
-                                <div class="upArrow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
-                                        <g>
-                                            <path d="M1 8h10L6 3 1 8" />
-                                        </g>
-                                    </svg>
-                                </div>
-                                <p>
-                                    <%= posts.score %>
-                                </p>
-                                <div class="downArrow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
-                                        <g>
-                                            <path d="M1 4h10L6 9 1 4" />
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
+                <div class="posts">
+                    <div class="postsBody">
+                        <p>
+                            <%= posts.body %>
+                        </p>
+                        <div class="postsInfo">
+                            <span>
+                                <%= posts.author %> -
+                                <%= posts.createdAt.toLocaleDateString("en-US") %>
+                            </span>
                         </div>
-                        <% }); %>
                     </div>
+                    <div class="postsScore">
+                        <div class="upArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                <g>
+                                    <path d="M1 8h10L6 3 1 8" />
+                                </g>
+                            </svg>
+                        </div>
+                        <p>
+                            <%= posts.score %>
+                        </p>
+                        <div class="downArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                <g>
+                                    <path d="M1 4h10L6 9 1 4" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+
+            <div class="graphsPostsContainer">
+                <div class="postsHeader">Graphs</div>
+            </div>
         </section>
     </main>
     <footer>
     </footer>
 </body>
+
 </html>
 <script src="app.js"></script>
