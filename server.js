@@ -6,6 +6,7 @@ const { mongoose } = require('./db/mongoose');
 const { Post } = require('./models/posts');
 
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
@@ -19,18 +20,20 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/graph', (req, res) => {
-    res.render('graph');
-});
-
 app.post('/newPost', (req, res) => {
-    req.body.createdAt = new Date();
-    let post = new Post(req.body);
+    let post = new Post({
+        title: req.body.title,
+        postType: req.body.postType,
+        author: "Declan Baldwin",
+        body: req.body.text,
+        createdAt: new Date()
+    });
     post.save().then((doc) => {
         res.send(doc);
     }).catch((error) => {
         res.status(404).send(error);
     })
+    res.redirect('/');
 });
 
 app.listen(port, () => {

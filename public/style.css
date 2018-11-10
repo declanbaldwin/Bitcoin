@@ -131,14 +131,14 @@ aside {
     border-radius: 6px;
 }
 
-.factsPostsContainer, .opinionsPostsContainer, .experiencesPostsContainer, .graphsPostsContainer {
+.factsPostsContainer, .opinionsPostsContainer, .experiencesPostsContainer, .newPostContainer {
     margin-left: 20px;
     background-color: #ffffff;
     width: 75%;
     box-shadow: 0 0 5px;
 }
 
-.opinionsPostsContainer, .experiencesPostsContainer, .graphsPostsContainer {
+.opinionsPostsContainer, .experiencesPostsContainer, .newPostContainer{
     display: none;
 }
 
@@ -180,4 +180,32 @@ aside {
     width: 0.75rem;
     height: 0.75rem;
     cursor: pointer;
+}
+
+.newPostForm {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    color: #444444;
+}
+
+.newPostForm input, .newPostForm select {
+    font-size: 1rem;
+    border: 1px solid #afafaf;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-bottom: 0.5rem;
+}
+
+.newPostForm input:focus, .newPostForm select:focus {
+    border: 1px solid rgb(28, 28, 28);
+}
+
+.newPostForm #text {
+    min-height: 4rem;
+}
+
+.newPostForm .newPostButton {
+    max-width: 100px;
+    margin: 0;
 }

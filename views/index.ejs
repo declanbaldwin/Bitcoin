@@ -35,7 +35,6 @@
                     <div id="factsTab">Facts</div>
                     <div id="opinionsTab">Opinions</div>
                     <div id="experiencesTab">Experiences</div>
-                    <div id="graphsTab">Graph</div>
                 </div>
             </div>
         </aside>
@@ -86,7 +85,7 @@
             </div>
 
             <div class="opinionsPostsContainer">
-                <div class="postsHeader">Opinion</div>
+                <div class="postsHeader">Opinions</div>
                 <% posts.forEach( function( posts ){ 
                         if(posts.postType !== "opinion") return;
                     %>
@@ -164,9 +163,19 @@
                 </div>
                 <% }); %>
             </div>
-
-            <div class="graphsPostsContainer">
-                <div class="postsHeader">Graphs</div>
+            <div class="newPostContainer">
+                <div class="postsHeader">New Post</div>
+                <form class="newPostForm" action="/newPost" method="POST">
+                    <input type="text" name="title" id="title" placeholder="Title">
+                    <select name="postType" id="postTypeDropdown" placeholder="Please select a type.">
+                        <option value="">Please choose an type</option>
+                        <option value="fact">Fact</option>
+                        <option value="opinion">Opinion</option>
+                        <option value="experience">Experience</option>
+                    </select>
+                    <input type="text" name="text" id="text" placeholder="Text">
+                    <button class="newPostButton">Post</button>
+                </form>
             </div>
         </section>
     </main>
