@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://databaseUsername:password1@ds135003.mlab.com:35003/heroku_lnnqvh7b');
+mongoose.connect(process.env.MONGODB_URI);
 
 module.exports = {
     mongoose: mongoose

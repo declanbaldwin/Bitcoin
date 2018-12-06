@@ -1,3 +1,5 @@
+require('./config/config');
+
 const express = require('express');
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
@@ -5,8 +7,8 @@ const app = express();
 const { mongoose } = require('./db/mongoose');
 const { Post } = require('./models/posts');
 
-app.use(express.static('public'))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
@@ -29,13 +31,14 @@ app.post('/newPost', (req, res) => {
         createdAt: new Date()
     });
     post.save().then((doc) => {
-        res.send(doc);
+        res.redirect('/');
     }).catch((error) => {
         res.status(404).send(error);
-    })
-    res.redirect('/');
+    });
 });
 
 app.listen(port, () => {
     console.log(`Listening on port: ${port}`);
-})
+});
+
+module.exports = { app };
