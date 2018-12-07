@@ -12,10 +12,10 @@ beforeEach((done) => {
     Post.remove({}).then(() => done());
 });
 
-describe("POST /newPost", () => {
+describe("POST /posts", () => {
     it("should create a new post", done => {
         chai.request(app)
-            .post("/newPost")
+            .post("/posts")
             .send({
                 _method: "post",
                 title: "test title",
