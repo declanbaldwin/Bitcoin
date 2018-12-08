@@ -1,6 +1,7 @@
 const { ObjectID } = require("mongodb");
 const { app } = require("../server");
 const { Post } = require("../models/posts");
+const { User } = require("../models/user");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const expect = chai.expect;
@@ -10,6 +11,9 @@ chai.should();
 
 beforeEach((done) => {
     Post.remove({}).then(() => done());
+});
+beforeEach((done) => {
+    User.remove({}).then(() => done());
 });
 
 describe("POST /posts", () => {
@@ -35,3 +39,13 @@ describe("POST /posts", () => {
             });
     });
 });
+
+// describe("POST /users", () => {
+//     it('should create a new user', done => {
+//         chai.request(app)
+//             .post('/users')
+//             .send({
+
+//             })
+//     });
+// });
