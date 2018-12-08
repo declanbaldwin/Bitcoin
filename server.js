@@ -27,6 +27,10 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
 app.get('/posts', (req, res) => {
     Post.find({}).then((posts) => {
         res.send({posts});
