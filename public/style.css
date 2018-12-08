@@ -50,7 +50,7 @@ nav div {
     border: 2px solid #f79413;
 }
 
-.signInButton {
+.signInButton, .signUpButton {
     background-color: #ffffff;
     height: 38px;
     font-size: 100%;
@@ -62,7 +62,7 @@ nav div {
     cursor: pointer;
 }
 
-.signInButton:hover {
+.signInButton:hover, .signUpButton:hover {
     color: #ffffff;
     background-color: #444444;
     border: 2px solid #444444;
@@ -129,6 +129,11 @@ aside {
     cursor: pointer;
     margin-left: 10px;
     border-radius: 6px;
+}
+
+.newPostButton:hover{
+    background-color: #da9118;
+    border: 1px solid #da9118;
 }
 
 .factsPostsContainer, .opinionsPostsContainer, .experiencesPostsContainer, .newPostContainer {

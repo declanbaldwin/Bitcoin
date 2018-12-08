@@ -40,4 +40,18 @@ $(document).ready(function() {
         $('.experiencesPostsContainer').hide('slow');
         $('.newPostContainer').show('slow');
     });
+
+    $('.signUpButton').on("click", function() {
+        $('#loginSection').hide();
+        $('.signUpButton').hide();
+        $('#signUpSection').show();
+        $('.signInButton').show();
+    });
+
+    $('.signInButton').on("click", function() {
+        $('#signUpSection').hide();
+        $('.signInButton').hide();
+        $('#loginSection').show();
+        $('.signUpButton').show();
+    });
 });

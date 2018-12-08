@@ -34,15 +34,38 @@
           <input type="text" name="search" placeholder="Search..." />
         </div>
       </div>
-      <div class="signIn">
-        <button class="signInButton" type="button"><span>Sign Up</span></button>
+      <div class="signInAndUpButtons">
+        <button class="signUpButton" type="button"><span>Sign Up</span></button>
+        <button class="signInButton" type="button"><span>Sign In</span></button>
       </div>
     </nav>
     <main>
       <section id="loginSection">
-        <div class="loginBody"><div class="postsHeader">Log in</div></div>
-        <div class="loginFooter"></div>
+        <div class="loginBody">
+          <div class="postsHeader">Log in</div>
+          <form class="loginForm" action="/users/login" method="post">
+            <input type="text" name="email" id="email" placeholder="Email">
+            <input type="text" name="password" id="password" placeholder="Password">
+            <button class="loginButton">Log In</button>
+            <a href="">Forgotton your password?</a>
+          </form>
+        </div>
       </section>
+      <section id="signUpSection">
+          <div class="loginBody">
+            <div class="postsHeader">Sign Up</div>
+            <form class="signUpForm" action="/users/login" method="post">
+              <input type="text" name="firstName" id="firstName" placeholder="First Name">
+              <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+              <input type="text" name="email" id="email" placeholder="Email">
+              <input type="text" name="password" id="password" placeholder="Password">
+              <input type="text" name="confirmPassword" id="confirmPassword" placeholder="Please Re-Enter Password">
+              <button class="loginButton">Sign Up</button>
+            </form>
+          </div>
+        </section>
     </main>
   </body>
 </html>
+
+<script src="app.js"></script>
