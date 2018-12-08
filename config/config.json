@@ -1,10 +1,12 @@
 {
     "test": {
         "PORT": 3000,
-        "MONGODB_URI": "mongodb://localhost:27017/BitcoinTest"
+        "MONGODB_URI": "mongodb://localhost:27017/BitcoinTest",
+        "JWT_SECRET": "abc123"
     },
     "development": {
         "PORT": 3000,
-        "MONGODB_URI": "mongodb://localhost:27017/Bitcoin"
+        "MONGODB_URI": "mongodb://localhost:27017/Bitcoin",
+        "JWT_SECRET": "abc123"
     }
 }

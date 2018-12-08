@@ -80,9 +80,23 @@ app.post('/users', (req, res) => {
     });
 
     user.save().then(() => {
-        res.redirect('/');
+        return user.generateAuthToken();
+    }).then((token) => {
+        //setting header to send back to client
+        res.header('x-auth', token).redirect('/');
     }).catch((e) => {
         res.status(400).send(e);
+    });
+});
+
+app.post('/users/login', (req, res) => {
+    var body = _.pick(req.body, ['email', 'password']);
+    User.findByCredentials(body.email, body.password).then((user) => {
+        return user.generateAuthToken().then((token) => {
+            res.header('x-auth', token).redirect('/');
+        });
+    }).catch((e) => {
+        res.status(400).send(); 
     });
 });
 
