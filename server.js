@@ -56,7 +56,7 @@ app.get('/posts/:id', (req, res) => {
     });
 });
 
-app.post('/posts', (req, res) => {
+app.post('/posts', authenticate, (req, res) => {
     let post = new Post({
         title: req.body.title,
         postType: req.body.postType,
@@ -83,7 +83,7 @@ app.post('/users', (req, res) => {
         return user.generateAuthToken();
     }).then((token) => {
         //setting header to send back to client
-        res.header('x-auth', token).redirect('/');
+        res.header('x-auth', token).send(user);
     }).catch((e) => {
         res.status(400).send(e);
     });
@@ -93,7 +93,7 @@ app.post('/users/login', (req, res) => {
     var body = _.pick(req.body, ['email', 'password']);
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
-            res.header('x-auth', token).redirect('/');
+            res.header('x-auth', token).send(user);
         });
     }).catch((e) => {
         res.status(400).send(); 
