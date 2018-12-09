@@ -11,10 +11,12 @@ const { mongoose } = require('./db/mongoose');
 const { Post } = require('./models/posts');
 const { User } = require('./models/user');
 const {authenticate} = require('./middleware/authenticate');
+const cookieParser = require('cookie-parser');
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
@@ -82,8 +84,7 @@ app.post('/users', (req, res) => {
     user.save().then(() => {
         return user.generateAuthToken();
     }).then((token) => {
-        //setting header to send back to client
-        res.header('x-auth', token).send(user);
+        res.status(200).cookie('token', token).redirect('/');
     }).catch((e) => {
         res.status(400).send(e);
     });
@@ -93,7 +94,7 @@ app.post('/users/login', (req, res) => {
     var body = _.pick(req.body, ['email', 'password']);
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
-            res.header('x-auth', token).send(user);
+            res.status(200).cookie('token', token).redirect('/');
         });
     }).catch((e) => {
         res.status(400).send(); 
