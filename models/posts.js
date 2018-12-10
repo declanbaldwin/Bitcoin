@@ -22,6 +22,10 @@ var postSchema = new Schema({
     score: {
         type: Number,
         default: "0"
+    },
+    _creator: {
+      required: true,
+      type: mongoose.Schema.Types.ObjectId
     }
 });
 

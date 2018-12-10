@@ -20,9 +20,11 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
+    var {token} = req.cookies;
     Post.find({}).then((posts) => {
         res.render('index', {
-            posts: posts
+            posts: posts,
+            token: token
         });
     }).catch((error) => {
         res.status(404).send(error);
@@ -31,6 +33,22 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render('login');
+});
+
+app.get('/logout', (req, res) => {
+    var {token} = req.cookies;
+
+    User.findByToken(token)
+        .then(user => {
+            if (!user) {
+                res.clearCookie('token').redirect('/');
+            }
+            user.token = null;
+            res.clearCookie('token').redirect('/');
+        }).catch(e => {
+            res.status(401).send();
+        });
+        
 });
 
 app.get('/posts', (req, res) => {
@@ -59,10 +77,11 @@ app.get('/posts/:id', (req, res) => {
 });
 
 app.post('/posts', authenticate, (req, res) => {
+    
     let post = new Post({
         title: req.body.title,
         postType: req.body.postType,
-        author: "Declan Baldwin",
+        _creator: req.user._id,
         body: req.body.text,
         createdAt: new Date()
     });

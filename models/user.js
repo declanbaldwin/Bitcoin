@@ -79,14 +79,13 @@ UserSchema.statics.findByCredentials = function(email, password) {
 };
 
 UserSchema.statics.findByToken = function(token) {
-    console.log('find by token');
     var User = this;
     var decoded;
     
     try {
         decoded = jwt.verify(token, process.env.JWT_SECRET);
         if(!decoded) {
-            console.log('unauthorised')
+            console.log('unauthorised');
         }
     } catch(e) {
         return Promise.reject();
