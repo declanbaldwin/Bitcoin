@@ -35,20 +35,13 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/logout', (req, res) => {
-    var {token} = req.cookies;
+app.get('/logout', authenticate, (req, res) => {
 
-    User.findByToken(token)
-        .then(user => {
-            if (!user) {
-                res.clearCookie('token').redirect('/');
-            }
-            user.token = null;
-            res.clearCookie('token').redirect('/');
-        }).catch(e => {
-            res.status(401).send();
-        });
-        
+    req.user.removeToken(req.token).then(() => {
+        res.clearCookie('token').status(200).redirect('/');
+    }), () => {
+        res.status(400).send();
+    };
 });
 
 app.get('/posts', (req, res) => {
@@ -103,7 +96,7 @@ app.post('/users', (req, res) => {
     user.save().then(() => {
         return user.generateAuthToken();
     }).then((token) => {
-        res.status(200).cookie('token', token).redirect('/');
+        res.status(200).cookie('token', token, {httpOnly: true}).redirect('/');
     }).catch((e) => {
         res.status(400).send(e);
     });
@@ -113,7 +106,7 @@ app.post('/users/login', (req, res) => {
     var body = _.pick(req.body, ['email', 'password']);
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
-            res.status(200).cookie('token', token).redirect('/');
+            res.status(200).cookie('token', token, {httpOnly: true}).redirect('/');
         });
     }).catch((e) => {
         res.status(400).send(); 
