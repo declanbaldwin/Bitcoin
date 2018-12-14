@@ -23,9 +23,11 @@ var postSchema = new Schema({
         type: Number,
         default: "0"
     },
-    _creator: {
-      required: true,
-      type: mongoose.Schema.Types.ObjectId
+    author: {
+        type: String,
+        require: true,
+        trim: true,
+        minlength: 1
     }
 });
 

@@ -35,10 +35,12 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/logout', authenticate, (req, res) => {
-
+app.get('/logout', (req, res) => {
+    if(!req.token) {
+        return res.clearCookie('token').status(200).redirect('/');
+    }
     req.user.removeToken(req.token).then(() => {
-        res.clearCookie('token').status(200).redirect('/');
+        return res.clearCookie('token').status(200).redirect('/');
     }), () => {
         res.status(400).send();
     };
@@ -71,14 +73,17 @@ app.get('/posts/:id', (req, res) => {
 
 app.post('/posts', authenticate, (req, res) => {
     
-    let post = new Post({
-        title: req.body.title,
-        postType: req.body.postType,
-        _creator: req.user._id,
-        body: req.body.text,
-        createdAt: new Date()
-    });
-    post.save().then((doc) => {
+    User.findById(req.user._id).then((user) => {
+        let post = new Post({
+            title: req.body.title,
+            postType: req.body.postType,
+            author: user.firstName,
+            body: req.body.text,
+            createdAt: new Date()
+        });
+
+        return post.save();
+    }).then(() => {
         res.redirect('/');
     }).catch((error) => {
         res.status(404).send(error);
@@ -106,7 +111,7 @@ app.post('/users/login', (req, res) => {
     var body = _.pick(req.body, ['email', 'password']);
     User.findByCredentials(body.email, body.password).then((user) => {
         return user.generateAuthToken().then((token) => {
-            res.status(200).cookie('token', token, {httpOnly: true}).redirect('/');
+            res.cookie('token', token, {httpOnly: true}).redirect('/');
         });
     }).catch((e) => {
         res.status(400).send(); 
