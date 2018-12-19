@@ -49,7 +49,6 @@ app.get("/", (req, res) => {
             });
         })
         .then(() => {
-            console.log(results);
             return res.render("index", {
                 posts: results.posts,
                 token: token,

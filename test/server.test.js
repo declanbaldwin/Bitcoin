@@ -5,16 +5,17 @@ const { User } = require("../models/user");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const expect = chai.expect;
+const {users, populateUsers} = require('./seed/seed');
 
 chai.use(chaiHttp);
 chai.should();
 
+
+
 beforeEach(done => {
-    Post.remove({}).then(() => done());
+    Post.deleteMany({}).then(() => done());
 });
-beforeEach(done => {
-    User.remove({}).then(() => done());
-});
+beforeEach(populateUsers);
 
 // describe("POST /posts", () => {
 //     it("should create a new post", done => {
@@ -39,6 +40,26 @@ beforeEach(done => {
 //             });
 //     });
 // });
+
+describe("POST /users/login", () => {
+    it("should login a user", done => {
+        chai.request(app)
+        .post('/users/login')
+        .type('form')
+        .send({
+            _method: "post",
+            email: "user1@example.com",
+            password: 'password1'
+        })
+        .end((err, res) => {
+            if (err) {
+                return done(err);
+            }
+            expect(res).to.have.status(200);
+            done();
+        });
+    });
+});
 
 describe("POST /users", () => {
     it("should create a new user", done => {
