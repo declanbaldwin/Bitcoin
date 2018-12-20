@@ -93,6 +93,11 @@ app.get("/posts", (req, res) => {
     );
 });
 
+app.get("/account", authenticate, (req, res) => {
+    var { token } = req.cookies;
+
+});
+
 app.get("/posts/:id", (req, res) => {
     var id = req.params.id;
 

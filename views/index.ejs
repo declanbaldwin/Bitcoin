@@ -32,13 +32,16 @@
                     <input type="text" name="search" placeholder="Search..." />
                 </div>
             </div>
-            <% if(token) { %> 
-            <div class="signIn">
-                <a href="/logout">
-                    <button class="signInButton" type="button">
-                        <span><%= user.firstName %> <%= user.lastName %></span>
-                    </button>
-                </a>
+            <% if(token) { %>
+            <div class="dropdown">
+                <button class="myAccountButton" type="button">
+                    <span><%= user.firstName %> <%= user.lastName %></span>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">My Account</a> 
+                    <a href="#">My Posts</a>
+                    <a href="/logout">Log Out</a>
+                </div>
             </div>
             <% } else { %>
             <div class="signIn">

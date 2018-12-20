@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -13,8 +13,10 @@ body {
 nav {
     display: flex;
     z-index: 2;
-    background-color: #ffffff; 
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),0px 4px 5px 0px rgba(0, 0, 0, 0.14),0px 1px 10px 0px rgba(0, 0, 0, 0.12); 
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     min-height: 56px;
     padding-left: 10px;
     padding-right: 10px;
@@ -50,7 +52,41 @@ nav div {
     border: 2px solid #f79413;
 }
 
-.signInButton, .signUpButton {
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+    top: 100%;
+    display: none;
+    right: 20%;
+    box-shadow: 0 0 2px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-content a {
+    padding: 0.5rem;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: #444;
+    height: 100%;
+    width: 100%;
+}
+
+.dropdown-content a:hover {
+    border: 1px solid #da9118;
+}
+
+.myAccountButton {
     background-color: #ffffff;
     height: 38px;
     font-size: 100%;
@@ -62,7 +98,27 @@ nav div {
     cursor: pointer;
 }
 
-.signInButton:hover, .signUpButton:hover {
+.myAccountButton:hover {
+    color: #ffffff;
+    background-color: #444444;
+    border: 2px solid #444444;
+}
+
+.signInButton,
+.signUpButton {
+    background-color: #ffffff;
+    height: 38px;
+    font-size: 100%;
+    border: 2px solid #c4c4c4;
+    padding: 10px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.signInButton:hover,
+.signUpButton:hover {
     color: #ffffff;
     background-color: #444444;
     border: 2px solid #444444;
@@ -86,9 +142,9 @@ aside {
 .title {
     font-weight: 900;
     font-size: 2.5rem;
-    min-height: 100px;  
+    min-height: 100px;
     display: flex;
-    align-items: center;  
+    align-items: center;
 }
 
 .topics div {
@@ -131,19 +187,24 @@ aside {
     border-radius: 6px;
 }
 
-.newPostButton:hover{
+.newPostButton:hover {
     background-color: #da9118;
     border: 1px solid #da9118;
 }
 
-.factsPostsContainer, .opinionsPostsContainer, .experiencesPostsContainer, .newPostContainer {
+.factsPostsContainer,
+.opinionsPostsContainer,
+.experiencesPostsContainer,
+.newPostContainer {
     margin-left: 20px;
     background-color: #ffffff;
     width: 75%;
     box-shadow: 0 0 5px;
 }
 
-.opinionsPostsContainer, .experiencesPostsContainer, .newPostContainer{
+.opinionsPostsContainer,
+.experiencesPostsContainer,
+.newPostContainer {
     display: none;
 }
 
@@ -182,7 +243,8 @@ aside {
     font-size: 2.5rem;
 }
 
-.upArrow svg, .downArrow svg {
+.upArrow svg,
+.downArrow svg {
     width: 0.75rem;
     height: 0.75rem;
     cursor: pointer;
@@ -195,7 +257,8 @@ aside {
     color: #444444;
 }
 
-.newPostForm input, .newPostForm select {
+.newPostForm input,
+.newPostForm select {
     font-size: 1rem;
     border: 1px solid #afafaf;
     border-radius: 4px;
@@ -203,7 +266,8 @@ aside {
     margin-bottom: 0.5rem;
 }
 
-.newPostForm input:focus, .newPostForm select:focus {
+.newPostForm input:focus,
+.newPostForm select:focus {
     border: 1px solid rgb(28, 28, 28);
 }
 
