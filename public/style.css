@@ -224,6 +224,11 @@ aside {
   flex: 3;
 }
 
+.postsBody p:nth-child(2) {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}
+
 .postsInfo {
   font-size: 0.75rem;
   margin-top: 1rem;
