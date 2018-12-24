@@ -17,7 +17,7 @@
       integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
       crossorigin="anonymous"
     />
-    <title>My Account</title>
+    <title>My Posts</title>
   </head>
   <body>
     <nav>
@@ -36,27 +36,45 @@
       </div>
       <div class="dropdown">
         <button class="myAccountButton" type="button">
-            <span><%= user.firstName %> <%= user.lastName %></span>
+          <span><%= user.firstName %> <%= user.lastName %></span>
         </button>
         <div class="dropdown-content">
-            <a href="/account">My Account</a> 
-            <a href="/myposts">My Posts</a>
-            <a href="/logout">Log Out</a>
+          <a href="/account">My Account</a> <a href="/myposts">My Posts</a>
+          <a href="/logout">Log Out</a>
         </div>
-    </div>
+      </div>
     </nav>
     <main>
       <section id="loginSection">
         <div class="loginBody">
-          <div class="postsHeader">My Account</div>
-          <form class="loginForm" action="/users/update" method="post">
-            <input type="text" name="firstName" id="firstName" placeholder="First Name">
-            <input type="text" name="lastName" id="lastName" placeholder="Last Name">
-            <input type="text" name="email" id="email" placeholder="Email">
-            <input type="password" name="password" id="password" placeholder="Password">
-            <button class="loginButton">Update</button>
-          </form>
-        </div>
+          <div class="postsHeader">My Posts</div>
+            <% posts.forEach( function( posts ){ if(posts.postType !== "fact")
+            return; %>
+            <div class="posts">
+              <div class="postsBody">
+                <p><%= posts.title %></p>
+                <div class="postsInfo">
+                  <span>
+                    <%= posts.author %> - <%=
+                    posts.createdAt.toLocaleDateString("en-US") %>
+                  </span>
+                </div>
+              </div>
+              <div class="postsScore">
+                <div class="upArrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                    <g><path d="M1 8h10L6 3 1 8" /></g>
+                  </svg>
+                </div>
+                <p><%= posts.score %></p>
+                <div class="downArrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                    <g><path d="M1 4h10L6 9 1 4" /></g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <% }); %>
       </section>
     </main>
   </body>

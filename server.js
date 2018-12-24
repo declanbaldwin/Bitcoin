@@ -28,8 +28,7 @@ app.get("/", (req, res) => {
     Post.find({}).then(posts => {
       return res.render("index", {
         posts: posts,
-        token: token,
-        user: null
+        token: token
       });
     });
   }
@@ -93,6 +92,22 @@ app.get("/posts", (req, res) => {
   );
 });
 
+app.get("/myposts", authenticate, (req, res) => {
+  Post.find({
+    _creator: req.user._id
+  }).then(
+    posts => {
+      return res.render("myposts", {
+        posts: posts,
+        user: req.user
+      });
+    },
+    e => {
+      res.status(400).send(e);
+    }
+  );
+});
+
 app.get("/account", authenticate, (req, res) => {
   var { token } = req.cookies;
   var decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -134,8 +149,9 @@ app.post("/posts", authenticate, (req, res) => {
       let post = new Post({
         title: req.body.title,
         postType: req.body.postType,
-        author: user.firstName,
+        author: `${user.firstName} ${user.lastName}`,
         body: req.body.text,
+        _creator: req.user._id,
         createdAt: new Date()
       });
 
@@ -195,7 +211,7 @@ app.post("/users/update", authenticate, (req, res) => {
     "password"
   ]);
 
-  Object.keys(body).forEach((key) => (body[key] == '') && delete body[key]);
+  Object.keys(body).forEach(key => body[key] == "" && delete body[key]);
 
   var { token } = req.cookies;
   var decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -213,7 +229,7 @@ app.post("/users/update", authenticate, (req, res) => {
         return res.status(404).send();
       }
 
-      return res.redirect('/');
+      return res.redirect("/");
     })
     .catch(e => {
       res.status(400).send();

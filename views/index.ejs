@@ -39,7 +39,7 @@
                 </button>
                 <div class="dropdown-content">
                     <a href="/account">My Account</a> 
-                    <a href="#">My Posts</a>
+                    <a href="/myposts">My Posts</a>
                     <a href="/logout">Log Out</a>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                     "fact") return; %>
                     <div class="posts">
                         <div class="postsBody">
-                            <p><%= posts.body %></p>
+                            <p><%= posts.title %></p>
                             <div class="postsInfo">
                                 <span>
                                     <%= posts.author %> - <%=
@@ -116,7 +116,7 @@
                     "opinion") return; %>
                     <div class="posts">
                         <div class="postsBody">
-                            <p><%= posts.body %></p>
+                            <p><%= posts.title %></p>
                             <div class="postsInfo">
                                 <span>
                                     <%= posts.author %> - <%=
@@ -154,7 +154,7 @@
                     "experience") return; %>
                     <div class="posts">
                         <div class="postsBody">
-                            <p><%= posts.body %></p>
+                            <p><%= posts.title %></p>
                             <div class="postsInfo">
                                 <span>
                                     <%= posts.author %> - <%=
