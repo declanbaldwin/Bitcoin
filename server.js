@@ -236,6 +236,27 @@ app.post("/users/update", authenticate, (req, res) => {
     });
 });
 
+
+app.get('/deletePost/:id', authenticate, (req, res) => {
+  var id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+      return res.status(404).send();
+  }
+
+  Post.findOneAndRemove({
+      _id: id,
+      _creator: req.user._id
+  }).then((post) => {
+      if (!post) {
+          return res.status(404).send();
+      }
+
+      return res.redirect("/myposts");
+  }).catch((e) => {
+      res.status(400).send();
+  });
+});
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });

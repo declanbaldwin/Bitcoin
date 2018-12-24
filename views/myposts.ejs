@@ -48,8 +48,7 @@
       <section id="loginSection">
         <div class="loginBody">
           <div class="postsHeader">My Posts</div>
-            <% posts.forEach( function( posts ){ if(posts.postType !== "fact")
-            return; %>
+            <% posts.forEach( function( posts ){ %>
             <div class="posts">
               <div class="postsBody">
                 <p><%= posts.title %></p>
@@ -72,6 +71,11 @@
                     <g><path d="M1 4h10L6 9 1 4" /></g>
                   </svg>
                 </div>
+              </div>
+              <div class="deletePost">
+                  <form action='/deletePost/<%= posts._id %>' method="delete">
+                      <button type="submit">X</button>
+                  </form>
               </div>
             </div>
             <% }); %>

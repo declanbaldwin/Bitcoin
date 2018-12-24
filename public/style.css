@@ -1,281 +1,297 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
-    background-color: #f9f9f9;
-    color: #444444;
+  background-color: #f9f9f9;
+  color: #444444;
 }
 
 nav {
-    display: flex;
-    z-index: 2;
-    background-color: #ffffff;
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-        0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-    min-height: 56px;
-    padding-left: 10px;
-    padding-right: 10px;
-    position: fixed;
-    width: 100%;
+  display: flex;
+  z-index: 2;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  min-height: 56px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: fixed;
+  width: 100%;
 }
 
 nav div {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .centre {
-    flex: 3;
-    padding-left: 20px;
-    padding-right: 20px;
+  flex: 3;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .logo img {
-    height: 38px;
+  height: 38px;
 }
 
 .search input {
-    border-radius: 6px;
-    background-color: #f2f2f2;
-    border: 1px solid #ffffff;
-    height: 38px;
-    font-size: 100%;
-    padding: 10px 10px;
+  border-radius: 6px;
+  background-color: #f2f2f2;
+  border: 1px solid #ffffff;
+  height: 38px;
+  font-size: 100%;
+  padding: 10px 10px;
 }
 
 .search input:focus {
-    border: 2px solid #f79413;
+  border: 2px solid #f79413;
 }
 
 .dropdown {
-    position: relative;
+  position: relative;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    z-index: 1;
-    top: 100%;
-    display: none;
-    right: 20%;
-    box-shadow: 0 0 2px;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  z-index: 1;
+  top: 100%;
+  display: none;
+  right: 20%;
+  box-shadow: 0 0 2px;
 }
 
 .dropdown:hover .dropdown-content {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .dropdown-content a {
-    padding: 0.5rem;
-    padding: 0.5rem;
-    text-decoration: none;
-    color: #444;
-    height: 100%;
-    width: 100%;
+  padding: 0.5rem;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #444;
+  height: 100%;
+  width: 100%;
 }
 
 .dropdown-content a:hover {
-    border: 1px solid #da9118;
+  border: 1px solid #da9118;
 }
 
 .myAccountButton {
-    background-color: #ffffff;
-    height: 38px;
-    font-size: 100%;
-    border: 2px solid #c4c4c4;
-    padding: 10px 10px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  background-color: #ffffff;
+  height: 38px;
+  font-size: 100%;
+  border: 2px solid #c4c4c4;
+  padding: 10px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .myAccountButton:hover {
-    color: #ffffff;
-    background-color: #444444;
-    border: 2px solid #444444;
+  color: #ffffff;
+  background-color: #444444;
+  border: 2px solid #444444;
 }
 
 .signInButton,
 .signUpButton {
-    background-color: #ffffff;
-    height: 38px;
-    font-size: 100%;
-    border: 2px solid #c4c4c4;
-    padding: 10px 10px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  background-color: #ffffff;
+  height: 38px;
+  font-size: 100%;
+  border: 2px solid #c4c4c4;
+  padding: 10px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .signInButton:hover,
 .signUpButton:hover {
-    color: #ffffff;
-    background-color: #444444;
-    border: 2px solid #444444;
+  color: #ffffff;
+  background-color: #444444;
+  border: 2px solid #444444;
 }
 
 main {
-    display: flex;
-    padding-top: 56px;
+  display: flex;
+  padding-top: 56px;
 }
 
 aside {
-    display: flex;
-    flex-direction: row-reverse;
-    flex: 1;
+  display: flex;
+  flex-direction: row-reverse;
+  flex: 1;
 }
 
 .postsSection {
-    flex: 3;
+  flex: 3;
 }
 
 .title {
-    font-weight: 900;
-    font-size: 2.5rem;
-    min-height: 100px;
-    display: flex;
-    align-items: center;
+  font-weight: 900;
+  font-size: 2.5rem;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
 }
 
 .topics div {
-    padding-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    padding-left: 1rem;
-    color: #c4c4c4;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  color: #c4c4c4;
 }
 
 .topics div:hover {
-    background-color: #ffffff;
-    color: #444444;
-    border-left: 3px solid #f79413;
-    cursor: pointer;
+  background-color: #ffffff;
+  color: #444444;
+  border-left: 3px solid #f79413;
+  cursor: pointer;
 }
 
 .fixedMenu .topics .selected {
-    background-color: #ffffff;
-    border-left: 3px solid #f79413;
-    color: #444444;
+  background-color: #ffffff;
+  border-left: 3px solid #f79413;
+  color: #444444;
 }
 
 .postsSectionHeader {
-    display: flex;
-    min-height: 100px;
-    align-items: center;
-    flex-direction: row-reverse;
-    width: 75%;
-    margin-left: 20px;
+  display: flex;
+  min-height: 100px;
+  align-items: center;
+  flex-direction: row-reverse;
+  width: 75%;
+  margin-left: 20px;
 }
 
 .newPostButton {
-    background-color: #f5a623;
-    border: 1px solid #f5a623;
-    padding: 10px 10px;
-    height: 38px;
-    font-size: 100%;
-    cursor: pointer;
-    margin-left: 10px;
-    border-radius: 6px;
+  background-color: #f5a623;
+  border: 1px solid #f5a623;
+  padding: 10px 10px;
+  height: 38px;
+  font-size: 100%;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 6px;
 }
 
 .newPostButton:hover {
-    background-color: #da9118;
-    border: 1px solid #da9118;
+  background-color: #da9118;
+  border: 1px solid #da9118;
 }
 
 .factsPostsContainer,
 .opinionsPostsContainer,
 .experiencesPostsContainer,
 .newPostContainer {
-    margin-left: 20px;
-    background-color: #ffffff;
-    width: 75%;
-    box-shadow: 0 0 5px;
+  margin-left: 20px;
+  background-color: #ffffff;
+  width: 75%;
+  box-shadow: 0 0 5px;
 }
 
 .opinionsPostsContainer,
 .experiencesPostsContainer,
 .newPostContainer {
-    display: none;
+  display: none;
 }
 
 .postsHeader {
-    font-size: 1.25rem;
-    padding: 1.25rem;
-    font-weight: 800;
+  font-size: 1.25rem;
+  padding: 1.25rem;
+  font-weight: 800;
 }
 
 .posts {
-    display: flex;
-    border-top: 1px solid #c4c4c4;
-    border-bottom: 1px solid #c4c4c4;
-    padding: 1.25rem;
+  display: flex;
+  border-top: 1px solid #c4c4c4;
+  border-bottom: 1px solid #c4c4c4;
+  padding: 1.25rem;
 }
 
 .postsBody {
-    flex: 3;
+  flex: 3;
 }
 
 .postsInfo {
-    font-size: 0.75rem;
-    margin-top: 1rem;
-    color: #afafaf;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  color: #afafaf;
 }
 
 .postsScore {
-    flex: 1;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .factscore p {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 .upArrow svg,
 .downArrow svg {
-    width: 0.75rem;
-    height: 0.75rem;
-    cursor: pointer;
+  width: 0.75rem;
+  height: 0.75rem;
+  cursor: pointer;
 }
 
 .newPostForm {
-    display: flex;
-    flex-direction: column;
-    padding: 1.25rem;
-    color: #444444;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  color: #444444;
 }
 
 .newPostForm input,
 .newPostForm select {
-    font-size: 1rem;
-    border: 1px solid #afafaf;
-    border-radius: 4px;
-    padding: 4px 8px;
-    margin-bottom: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #afafaf;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-bottom: 0.5rem;
 }
 
 .newPostForm input:focus,
 .newPostForm select:focus {
-    border: 1px solid rgb(28, 28, 28);
+  border: 1px solid rgb(28, 28, 28);
 }
 
 .newPostForm #text {
-    min-height: 4rem;
+  min-height: 4rem;
 }
 
 .newPostForm .newPostButton {
-    max-width: 100px;
-    margin: 0;
+  max-width: 100px;
+  margin: 0;
+}
+
+.deletePost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deletePost button {
+  width: 2rem;
+  height: 2rem;
+  color: red;
+  font-weight: bold;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
