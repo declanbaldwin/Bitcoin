@@ -284,19 +284,13 @@ aside {
   margin: 0;
 }
 
-.deletePost {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .deletePost button {
-  width: 2rem;
-  height: 2rem;
-  color: red;
-  font-weight: bold;
   border: none;
   background: none;
-  font-size: 1.5rem;
   cursor: pointer;
+  margin-top: 1rem;
+}
+
+.deletePost img {
+  width: 1.5rem;
 }
