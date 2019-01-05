@@ -196,11 +196,13 @@
                             name="title"
                             id="title"
                             placeholder="Title"
+                            required
                         />
                         <select
                             name="postType"
                             id="postTypeDropdown"
                             placeholder="Please select a type."
+                            required
                         >
                             <option value="">Please choose an type</option>
                             <option value="fact">Fact</option>
@@ -212,6 +214,8 @@
                             name="text"
                             id="text"
                             placeholder="Text"
+                            maxlength="300"
+                            required
                         />
                         <button class="newPostButton">Post</button>
                     </form>

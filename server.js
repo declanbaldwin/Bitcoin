@@ -63,22 +63,25 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
-app.get("/logout", (req, res) => {
-  if (!req.token) {
+app.get("/logout", authenticate, (req, res) => {
+  var { token } = req.cookies;
+  if (!token) {
     return res
       .clearCookie("token")
       .status(200)
       .redirect("/");
   }
-  req.user.removeToken(req.token).then(() => {
-    return res
-      .clearCookie("token")
-      .status(200)
-      .redirect("/");
-  }),
-    () => {
-      res.status(400).send();
-    };
+  req.user
+    .removeToken(token)
+    .then(() => {
+      return res
+        .clearCookie("token")
+        .status(200)
+        .redirect("/");
+    })
+    .catch(error => {
+      res.status(404).send(error);
+    });
 });
 
 app.get("/posts", (req, res) => {
@@ -236,26 +239,27 @@ app.post("/users/update", authenticate, (req, res) => {
     });
 });
 
-
-app.get('/deletePost/:id', authenticate, (req, res) => {
+app.get("/deletePost/:id", authenticate, (req, res) => {
   var id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
-      return res.status(404).send();
+    return res.status(404).send();
   }
 
   Post.findOneAndRemove({
-      _id: id,
-      _creator: req.user._id
-  }).then((post) => {
+    _id: id,
+    _creator: req.user._id
+  })
+    .then(post => {
       if (!post) {
-          return res.status(404).send();
+        return res.status(404).send();
       }
 
       return res.redirect("/myposts");
-  }).catch((e) => {
+    })
+    .catch(e => {
       res.status(400).send();
-  });
+    });
 });
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
