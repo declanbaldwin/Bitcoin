@@ -2,11 +2,15 @@ var { User } = require("../models/user");
 
 var authenticate = (req, res, next) => {
     var {token} = req.cookies;
+    if(!token) {
+        console.log('no token found');
+        res.redirect('/');
+    }
 
     User.findByToken(token)
         .then(user => {
             if (!user) {
-                return Promise.reject("unable to find user");
+                return res.redirect('/');
             }
             req.user = user;
             req.token = token;

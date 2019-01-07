@@ -157,7 +157,6 @@ app.post("/posts", authenticate, (req, res) => {
         _creator: req.user._id,
         createdAt: new Date()
       });
-
       return post.save();
     })
     .then(() => {
