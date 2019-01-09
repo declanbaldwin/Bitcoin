@@ -77,7 +77,7 @@
                     <% posts.forEach( function( posts ){ if(posts.postType !==
                     "fact") return; %>
                     <div class="posts">
-                        <div class="postsBody">
+                        <div class="postsBody" id="<%= posts._id %>">
                             <p><%= posts.title %></p>
                             <p><%= posts.body %></p>
                             <div class="postsInfo">

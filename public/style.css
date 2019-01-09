@@ -254,6 +254,10 @@ aside {
   cursor: pointer;
 }
 
+.upArrow svg:hover, .downArrow svg:hover {
+  fill: red;
+}
+
 .newPostForm {
   display: flex;
   flex-direction: column;

@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
     Post.find({}).then(posts => {
       return res.render("index", {
         posts: posts,
-        token: token
+        token: null
       });
     });
   }
@@ -260,6 +260,22 @@ app.get("/deletePost/:id", authenticate, (req, res) => {
       res.status(400).send();
     });
 });
+
+app.post('/vote', authenticate, (req, res) => {
+  console.log('vote route start');
+  if(req.body.voteType == 'up') {
+    Post.findOneAndUpdate({_creator: req.user._id}, {$inc: {score: 1}}, {new: true}).then((post) => {
+      console.log(post.score);
+      res.json({
+        "id": post._id,
+        "score": post.score
+      });
+    }).catch(e => {
+      res.status(400).send();
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });

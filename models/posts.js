@@ -32,7 +32,17 @@ var postSchema = new Schema({
   _creator: {
     required: true,
     type: mongoose.Schema.Types.ObjectId
-  }
+  },
+  upvoters: [
+    {
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ],
+  downvoters: [
+    {
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ]
 });
 
 const Post = mongoose.model("Post", postSchema);
