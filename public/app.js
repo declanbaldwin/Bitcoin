@@ -56,10 +56,12 @@ $(document).ready(function() {
     });
 
     $(".upArrow").on("click", function() {
+        let postID = this.parentElement.previousElementSibling.attributes.id.value;
         $.ajax({
             type: "POST",
             url: "http://localhost:3000/vote",
             data: {
+                "postID": postID, 
                 "voteType": "up"
             },
             success: successHandler,
@@ -68,6 +70,8 @@ $(document).ready(function() {
 
     function successHandler(data) {
         console.log(data);
-        document.getElementById(data.id).nextElementSibling.children[1].innerHTML = data.score;
+        let postScore = document.getElementById(data.id).nextElementSibling;
+        postScore.children[1].innerHTML = data.score;
+        postScore.children[0].classList.add("red");
     }
 });

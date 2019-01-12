@@ -89,7 +89,13 @@
                             </div>
                         </div>
                         <div class="postsScore">
+                        <% if(!token) { %>
                             <div class="upArrow">
+                        <% } else if(posts.upvoters.includes(user._id.toHexString())) { %>
+                            <div class="upArrow red">
+                        <% } else { %>
+                            <div class="upArrow">
+                        <% } %>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 12 12"

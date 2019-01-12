@@ -35,7 +35,7 @@ var postSchema = new Schema({
   },
   upvoters: [
     {
-      type: mongoose.Schema.Types.ObjectId
+      type: String
     }
   ],
   downvoters: [

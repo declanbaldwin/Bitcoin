@@ -298,3 +298,7 @@ aside {
 .deletePost img {
   width: 1.5rem;
 }
+
+.red {
+  fill: red;
+}

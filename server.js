@@ -264,7 +264,25 @@ app.get("/deletePost/:id", authenticate, (req, res) => {
 app.post('/vote', authenticate, (req, res) => {
   console.log('vote route start');
   if(req.body.voteType == 'up') {
-    Post.findOneAndUpdate({_creator: req.user._id}, {$inc: {score: 1}}, {new: true}).then((post) => {
+    //if user is in upvote array then remove and decrease score by one
+    //if user is not in upvote array then add to array, remove from downvote array and increase score by one
+    //add user to post upvoters array and increase score by 1
+    Post.findOneAndUpdate({_id: req.body.postID},
+      {
+        $inc: {
+          score: 1
+        },
+        $push: {
+          upvoters: req.user._id.toHexString()
+        },
+        $pull: {
+          downvoters: req.user._id.toHexString()   
+        }
+      }, 
+      {
+        new: true
+      }
+    ).then((post) => {
       console.log(post.score);
       res.json({
         "id": post._id,
