@@ -25,12 +25,16 @@ app.get("/", (req, res) => {
   var results = {};
 
   if (!token) {
-    Post.find({}).then(posts => {
-      return res.render("index", {
+    Post.find({})
+    .then(posts => {
+      res.render("index", {
         posts: posts,
         token: null
       });
-    });
+    })
+    .catch((error) => {
+      res.status(404).send(error);
+    })
   }
 
   Post.find({})
@@ -89,10 +93,13 @@ app.get("/posts", (req, res) => {
     posts => {
       res.send({ posts });
     },
-    e => {
-      res.status(400).send(e);
+    error => {
+      res.status(400).send(error);
     }
-  );
+  ).catch((error) => {
+    res.status(400).send(error);
+
+  });
 });
 
 app.get("/myposts", authenticate, (req, res) => {
@@ -105,10 +112,13 @@ app.get("/myposts", authenticate, (req, res) => {
         user: req.user
       });
     },
-    e => {
-      res.status(400).send(e);
+    error => {
+      res.status(400).send(error);
     }
-  );
+  ).catch((error) => {
+    res.status(400).send(error);
+
+  });
 });
 
 app.get("/account", authenticate, (req, res) => {
@@ -143,6 +153,9 @@ app.get("/posts/:id", (req, res) => {
       return res.status(400).send();
     }
     res.send({ post });
+  }).catch((error) => {
+    res.status(400).send(error);
+
   });
 });
 
@@ -233,8 +246,8 @@ app.post("/users/update", authenticate, (req, res) => {
 
       return res.redirect("/");
     })
-    .catch(e => {
-      res.status(400).send();
+    .catch(error => {
+      res.status(400).send(error);
     });
 });
 
@@ -256,41 +269,86 @@ app.get("/deletePost/:id", authenticate, (req, res) => {
 
       return res.redirect("/myposts");
     })
-    .catch(e => {
-      res.status(400).send();
+    .catch(error => {
+      res.status(400).send(error);
     });
 });
 
 app.post('/vote', authenticate, (req, res) => {
   console.log('vote route start');
+  console.log(req.body);
   if(req.body.voteType == 'up') {
-    //if user is in upvote array then remove and decrease score by one
-    //if user is not in upvote array then add to array, remove from downvote array and increase score by one
-    //add user to post upvoters array and increase score by 1
-    Post.findOneAndUpdate({_id: req.body.postID},
-      {
-        $inc: {
-          score: 1
-        },
-        $push: {
-          upvoters: req.user._id.toHexString()
-        },
-        $pull: {
-          downvoters: req.user._id.toHexString()   
+    Post.findById(req.body.postID)
+      .then((post) => {
+        console.log('found post');
+        console.log(post.upvoters);
+        if(post.upvoters.includes(req.user._id.toHexString())) {
+          console.log('user has already upvoted this post');
+          post.score = post.score - 1;
+          post.upvoters.pull(req.user._id)
+          return post.save();
+          
+        } else {
+          console.log('user hasnt upvoted this post');
+          post.score = post.score + 1;
+          post.downvoters.pull(req.user._id)
+          post.upvoters.push(req.user._id)
+          return post.save();
         }
-      }, 
-      {
-        new: true
-      }
-    ).then((post) => {
-      console.log(post.score);
-      res.json({
-        "id": post._id,
-        "score": post.score
+      }).then((post) => {
+        let arrowColour = ''
+        if(post.upvoters.includes(req.user._id.toHexString())) {
+          arrowColour = 'red';
+        } else {
+          arrowColour = 'black';
+        }
+        
+        res.json({
+          "id": post._id,
+          "score": post.score,
+          "arrowColour": arrowColour,
+          "voteType": "up"
+        });
+      }).catch(error => {
+        res.status(400).send(error);
       });
-    }).catch(e => {
-      res.status(400).send();
-    });
+  }
+
+  if(req.body.voteType == 'down') {
+    Post.findById(req.body.postID)
+      .then((post) => {
+        console.log('found post');
+        console.log(post.downvoters);
+        if(post.downvoters.includes(req.user._id.toHexString())) {
+          console.log('user has already downvoted this post');
+          post.score = post.score + 1;
+          post.downvoters.pull(req.user._id)
+          return post.save();
+          
+        } else {
+          console.log('user hasnt downvoted this post');
+          post.score = post.score - 1;
+          post.downvoters.push(req.user._id)
+          post.upvoters.pull(req.user._id)
+          return post.save();
+        }
+      }).then((post) => {
+        let arrowColour = ''
+        if(post.downvoters.includes(req.user._id.toHexString())) {
+          arrowColour = 'red';
+        } else {
+          arrowColour = 'black';
+        }
+        
+        res.json({
+          "id": post._id,
+          "score": post.score,
+          "arrowColour": arrowColour,
+          "voteType": "down"
+        });
+      }).catch(error => {
+        res.status(400).send(error);
+      });
   }
 });
 
