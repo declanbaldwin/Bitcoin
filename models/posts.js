@@ -40,7 +40,7 @@ var postSchema = new Schema({
   ],
   downvoters: [
     {
-      type: mongoose.Schema.Types.ObjectId
+      type: String
     }
   ]
 });

@@ -26,15 +26,15 @@ app.get("/", (req, res) => {
 
   if (!token) {
     Post.find({})
-    .then(posts => {
-      res.render("index", {
-        posts: posts,
-        token: null
+      .then(posts => {
+        res.render("index", {
+          posts: posts,
+          token: null
+        });
+      })
+      .catch(error => {
+        res.status(404).send(error);
       });
-    })
-    .catch((error) => {
-      res.status(404).send(error);
-    })
   }
 
   Post.find({})
@@ -89,36 +89,38 @@ app.get("/logout", authenticate, (req, res) => {
 });
 
 app.get("/posts", (req, res) => {
-  Post.find({}).then(
-    posts => {
-      res.send({ posts });
-    },
-    error => {
+  Post.find({})
+    .then(
+      posts => {
+        res.send({ posts });
+      },
+      error => {
+        res.status(400).send(error);
+      }
+    )
+    .catch(error => {
       res.status(400).send(error);
-    }
-  ).catch((error) => {
-    res.status(400).send(error);
-
-  });
+    });
 });
 
 app.get("/myposts", authenticate, (req, res) => {
   Post.find({
     _creator: req.user._id
-  }).then(
-    posts => {
-      return res.render("myposts", {
-        posts: posts,
-        user: req.user
-      });
-    },
-    error => {
+  })
+    .then(
+      posts => {
+        return res.render("myposts", {
+          posts: posts,
+          user: req.user
+        });
+      },
+      error => {
+        res.status(400).send(error);
+      }
+    )
+    .catch(error => {
       res.status(400).send(error);
-    }
-  ).catch((error) => {
-    res.status(400).send(error);
-
-  });
+    });
 });
 
 app.get("/account", authenticate, (req, res) => {
@@ -148,15 +150,16 @@ app.get("/posts/:id", (req, res) => {
 
   Post.findOne({
     _id: id
-  }).then(post => {
-    if (!post) {
-      return res.status(400).send();
-    }
-    res.send({ post });
-  }).catch((error) => {
-    res.status(400).send(error);
-
-  });
+  })
+    .then(post => {
+      if (!post) {
+        return res.status(400).send();
+      }
+      res.send({ post });
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
 });
 
 app.post("/posts", authenticate, (req, res) => {
@@ -274,79 +277,83 @@ app.get("/deletePost/:id", authenticate, (req, res) => {
     });
 });
 
-app.post('/vote', authenticate, (req, res) => {
-  console.log('vote route start');
-  console.log(req.body);
-  if(req.body.voteType == 'up') {
+app.post("/vote", authenticate, (req, res) => {
+  if (req.body.voteType == "up") {
     Post.findById(req.body.postID)
-      .then((post) => {
-        console.log('found post');
-        console.log(post.upvoters);
-        if(post.upvoters.includes(req.user._id.toHexString())) {
-          console.log('user has already upvoted this post');
-          post.score = post.score - 1;
-          post.upvoters.pull(req.user._id)
-          return post.save();
-          
-        } else {
-          console.log('user hasnt upvoted this post');
+      .then(post => {
+        let userHasUpvotedBoolean = post.upvoters.includes(req.user._id.toHexString());
+        let userHasDownVotedBoolean = post.downvoters.includes(req.user._id.toHexString());
+        if (!userHasUpvotedBoolean && !userHasDownVotedBoolean) {
+          post.upvoters.push(req.user._id);
           post.score = post.score + 1;
-          post.downvoters.pull(req.user._id)
-          post.upvoters.push(req.user._id)
+          return post.save();
+        } else if(!userHasUpvotedBoolean && userHasDownVotedBoolean) {
+          post.downvoters.pull(req.user._id);
+          post.upvoters.push(req.user._id);
+          post.score = post.score + 2;
+          return post.save();
+        } else if(userHasUpvotedBoolean) {
+          post.upvoters.pull(req.user._id);
+          post.score = post.score - 1;
           return post.save();
         }
-      }).then((post) => {
-        let arrowColour = ''
-        if(post.upvoters.includes(req.user._id.toHexString())) {
-          arrowColour = 'red';
+      })
+      .then(post => {
+        let arrowColour = "";
+        if (post.upvoters.includes(req.user._id.toHexString())) {
+          arrowColour = "red";
         } else {
-          arrowColour = 'black';
+          arrowColour = "black";
         }
-        
+
         res.json({
-          "id": post._id,
-          "score": post.score,
-          "arrowColour": arrowColour,
-          "voteType": "up"
+          id: post._id,
+          score: post.score,
+          arrowColour: arrowColour,
+          voteType: "up"
         });
-      }).catch(error => {
+      })
+      .catch(error => {
         res.status(400).send(error);
       });
   }
 
-  if(req.body.voteType == 'down') {
+  if (req.body.voteType == "down") {
     Post.findById(req.body.postID)
-      .then((post) => {
-        console.log('found post');
-        console.log(post.downvoters);
-        if(post.downvoters.includes(req.user._id.toHexString())) {
-          console.log('user has already downvoted this post');
-          post.score = post.score + 1;
-          post.downvoters.pull(req.user._id)
-          return post.save();
-          
-        } else {
-          console.log('user hasnt downvoted this post');
+      .then(post => {
+        let userHasUpvotedBoolean = post.upvoters.includes(req.user._id.toHexString());
+        let userHasDownVotedBoolean = post.downvoters.includes(req.user._id.toHexString());
+        if (!userHasDownVotedBoolean && !userHasUpvotedBoolean) {
+          post.downvoters.push(req.user._id);
           post.score = post.score - 1;
-          post.downvoters.push(req.user._id)
-          post.upvoters.pull(req.user._id)
+          return post.save();
+        } else if(!userHasDownVotedBoolean && userHasUpvotedBoolean) {
+          post.upvoters.pull(req.user._id);
+          post.downvoters.push(req.user._id);
+          post.score = post.score - 2;
+          return post.save();
+        } else if(userHasDownVotedBoolean) {
+          post.downvoters.pull(req.user._id);
+          post.score = post.score + 1;
           return post.save();
         }
-      }).then((post) => {
-        let arrowColour = ''
-        if(post.downvoters.includes(req.user._id.toHexString())) {
-          arrowColour = 'red';
+      })
+      .then(post => {
+        let arrowColour = "";
+        if (post.downvoters.includes(req.user._id.toHexString())) {
+          arrowColour = "red";
         } else {
-          arrowColour = 'black';
+          arrowColour = "black";
         }
-        
+
         res.json({
-          "id": post._id,
-          "score": post.score,
-          "arrowColour": arrowColour,
-          "voteType": "down"
+          id: post._id,
+          score: post.score,
+          arrowColour: arrowColour,
+          voteType: "down"
         });
-      }).catch(error => {
+      })
+      .catch(error => {
         res.status(400).send(error);
       });
   }

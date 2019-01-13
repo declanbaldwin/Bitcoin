@@ -68,36 +68,39 @@ $(document).ready(function() {
     });
   });
 
-//   $(".downArrow").on("click", function() {
-//     let postID = this.parentElement.previousElementSibling.attributes.id.value;
-//     $.ajax({
-//       type: "POST",
-//       url: "http://localhost:3000/vote",
-//       data: {
-//         postID: postID,
-//         voteType: "down"
-//       },
-//       success: successHandler
-//     });
-//   });
+  $(".downArrow").on("click", function() {
+    let postID = this.parentElement.previousElementSibling.attributes.id.value;
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:3000/vote",
+      data: {
+        postID: postID,
+        voteType: "down"
+      },
+      success: successHandler
+    });
+  });
 
   function successHandler(data) {
-    console.log(data);
     let postScore = document.getElementById(data.id).nextElementSibling;
     postScore.children[1].innerHTML = data.score;
     if (data.voteType == "up") {
       if (data.arrowColour == "red") {
         postScore.children[0].classList.add("red");
+        postScore.children[2].classList.remove("red");
       } else {
         postScore.children[0].classList.remove("red");
+        postScore.children[2].classList.remove("red");
       }
     }
 
     if (data.voteType == "down") {
       if (data.arrowColour == "red") {
         postScore.children[2].classList.add("red");
+        postScore.children[0].classList.remove("red");
       } else {
         postScore.children[2].classList.remove("red");
+        postScore.children[0].classList.remove("red");
       }
     }
   }
