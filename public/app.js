@@ -55,6 +55,10 @@ $(document).ready(function() {
     $(".signUpButton").show();
   });
 
+  $('.forgottenPasswordButton').on("click", function() {
+    alert("oops, this doesn't do anything yet")
+  })
+
   $(".upArrow").on("click", function() {
     let postID = this.parentElement.previousElementSibling.attributes.id.value;
     $.ajax({

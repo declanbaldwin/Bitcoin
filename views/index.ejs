@@ -225,6 +225,7 @@
                     <% }); %>
                 </div>
                 <div class="newPostContainer">
+                    <% if(token) { %>
                     <div class="postsHeader">New Post</div>
                     <form class="newPostForm" action="/posts" method="POST">
                         <input
@@ -255,6 +256,9 @@
                         />
                         <button class="newPostButton">Post</button>
                     </form>
+                    <% } else { %>
+                    <div class="postsHeader">To Post Something, Please Log In.</div>
+                    <% }; %>
                 </div>
             </section>
         </main>

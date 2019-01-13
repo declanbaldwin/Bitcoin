@@ -163,19 +163,15 @@ app.get("/posts/:id", (req, res) => {
 });
 
 app.post("/posts", authenticate, (req, res) => {
-  User.findById(req.user._id)
-    .then(user => {
-      let post = new Post({
-        title: req.body.title,
-        postType: req.body.postType,
-        author: `${user.firstName} ${user.lastName}`,
-        body: req.body.text,
-        _creator: req.user._id,
-        createdAt: new Date()
-      });
-      return post.save();
-    })
-    .then(() => {
+    let post = new Post({
+      title: req.body.title,
+      postType: req.body.postType,
+      author: `${req.user.firstName} ${req.user.lastName}`,
+      body: req.body.text,
+      _creator: req.user._id,
+      createdAt: new Date()
+    });
+    post.save().then(() => {
       res.redirect("/");
     })
     .catch(error => {
@@ -202,8 +198,8 @@ app.post("/users", (req, res) => {
         .cookie("token", token, { httpOnly: true })
         .redirect("/");
     })
-    .catch(e => {
-      res.status(400).send(e);
+    .catch(error => {
+      res.status(400).send(error);
     });
 });
 
@@ -215,8 +211,8 @@ app.post("/users/login", (req, res) => {
         res.cookie("token", token, { httpOnly: true }).redirect("/");
       });
     })
-    .catch(e => {
-      res.status(400).send();
+    .catch(error => {
+      res.status(400).send(error);
     });
 });
 
