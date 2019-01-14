@@ -22,14 +22,16 @@
     <body>
         <nav>
             <div class="logo">
-                <img
-                    alt="Bitcoin logo"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Bitcoin_logo.svg/256px-Bitcoin_logo.svg.png"
-                />
+                <a href="/">
+                    <img
+                      alt="Bitcoin logo"
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Bitcoin_logo.svg/256px-Bitcoin_logo.svg.png"
+                    />
+                </a>
             </div>
             <div class="centre">
                 <div class="search">
-                    <input type="text" name="search" placeholder="Search..." />
+                    <input type="text" name="search" id="searchInput" placeholder="Search..." />
                 </div>
             </div>
             <% if(token) { %>

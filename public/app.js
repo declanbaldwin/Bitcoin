@@ -57,7 +57,7 @@ $(document).ready(function() {
 
   $('.forgottenPasswordButton').on("click", function() {
     alert("oops, this doesn't do anything yet")
-  })
+  });
 
   $(".upArrow").on("click", function() {
     let postID = this.parentElement.previousElementSibling.attributes.id.value;
@@ -68,7 +68,7 @@ $(document).ready(function() {
         postID: postID,
         voteType: "up"
       },
-      success: successHandler
+      success: voteSuccessHandler
     });
   });
 
@@ -81,11 +81,11 @@ $(document).ready(function() {
         postID: postID,
         voteType: "down"
       },
-      success: successHandler
+      success: voteSuccessHandler
     });
   });
 
-  function successHandler(data) {
+  function voteSuccessHandler(data) {
     let postScore = document.getElementById(data.id).nextElementSibling;
     postScore.children[1].innerHTML = data.score;
     if (data.voteType == "up") {

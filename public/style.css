@@ -45,6 +45,7 @@ nav div {
   height: 38px;
   font-size: 100%;
   padding: 10px 10px;
+  transition: all .2s;
 }
 
 .search input:focus {
