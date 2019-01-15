@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var postSchema = new Schema({
+  
   title: {
     type: String,
     trim: true,
@@ -16,7 +17,7 @@ var postSchema = new Schema({
   body: {
     type: String,
     trim: true,
-    required: true
+    required: true,
   },
   createdAt: Date,
   score: {
@@ -43,6 +44,16 @@ var postSchema = new Schema({
       type: String
     }
   ]
+});
+
+postSchema.index({
+  title: 'text',
+  body: 'text',
+}, {
+  weights: {
+    name: 5,
+    description: 1,
+  },
 });
 
 const Post = mongoose.model("Post", postSchema);

@@ -7,6 +7,7 @@ $(document).ready(function() {
     $(".opinionsPostsContainer").hide("slow");
     $(".experiencesPostsContainer").hide("slow");
     $(".newPostContainer").hide("slow");
+    $(".searchPostsContainer").hide("slow");
     $(".factsPostsContainer").show("slow");
   });
 
@@ -17,6 +18,7 @@ $(document).ready(function() {
     $(".factsPostsContainer").hide("slow");
     $(".experiencesPostsContainer").hide("slow");
     $(".newPostContainer").hide("slow");
+    $(".searchPostsContainer").hide("slow");
     $(".opinionsPostsContainer").show("slow");
   });
 
@@ -27,17 +29,18 @@ $(document).ready(function() {
     $(".factsPostsContainer").hide("slow");
     $(".opinionsPostsContainer").hide("slow");
     $(".newPostContainer").hide("slow");
+    $(".searchPostsContainer").hide("slow");
     $(".experiencesPostsContainer").show("slow");
   });
 
   $(".newPostButton").on("click", function() {
-    //Need to check user is signed in
     $("#factsTab").removeClass("selected");
     $("#opinionsTab").removeClass("selected");
     $("#experiencesTab").removeClass("selected");
     $(".factsPostsContainer").hide("slow");
     $(".opinionsPostsContainer").hide("slow");
     $(".experiencesPostsContainer").hide("slow");
+    $(".searchPostsContainer").hide("slow");
     $(".newPostContainer").show("slow");
   });
 
@@ -107,5 +110,36 @@ $(document).ready(function() {
         postScore.children[0].classList.remove("red");
       }
     }
+  }
+
+  $('#searchInput').keypress(function(event) {
+    if(event.which !== 13) {
+      return;
+    }
+    $("#factsTab").removeClass("selected");
+    $("#opinionsTab").removeClass("selected");
+    $("#experiencesTab").removeClass("selected");
+    $(".factsPostsContainer").hide("slow");
+    $(".opinionsPostsContainer").hide("slow");
+    $(".experiencesPostsContainer").hide("slow");
+    $(".newPostContainer").hide("slow");
+    $(".searchPostsContainer").show("slow");
+
+    console.log('enter pressed');
+    let searchText = document.getElementById('searchInput').value;
+
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:3000/search",
+      data: {
+        searchText: searchText
+      },
+      success: searchSuccessHandler
+    });
+  });
+
+  function searchSuccessHandler(data) {
+    console.log('search success');
+    console.log(data);
   }
 });

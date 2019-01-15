@@ -195,7 +195,8 @@ aside {
 .factsPostsContainer,
 .opinionsPostsContainer,
 .experiencesPostsContainer,
-.newPostContainer {
+.newPostContainer,
+.searchPostsContainer {
   margin-left: 20px;
   background-color: #ffffff;
   width: 75%;
@@ -204,7 +205,8 @@ aside {
 
 .opinionsPostsContainer,
 .experiencesPostsContainer,
-.newPostContainer {
+.newPostContainer,
+.searchPostsContainer {
   display: none;
 }
 

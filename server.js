@@ -330,7 +330,25 @@ app.post("/vote", authenticate, (req, res) => {
     }
 });
 
-app.post("/search", (req, res) => {});
+app.post("/search", (req, res) => {
+    console.log('search route start');
+    let searchText = req.body.searchText;
+    console.log(searchText);
+
+    Post.find({ $text : { $search : searchText} }).then((posts) => {
+        console.log('search completed');
+        if(!posts) {
+            console.log('no posts found');
+        }
+        console.log(posts);
+        res.json({
+            posts: posts
+        });
+    }).catch(error => {
+        console.log(error);
+        res.status(400).send(error);
+    });
+});
 
 app.listen(port, () => {
     console.log(`Listening on port: ${port}`);
