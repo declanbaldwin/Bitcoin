@@ -51,8 +51,8 @@ postSchema.index({
   body: 'text',
 }, {
   weights: {
-    name: 5,
-    description: 1,
+    title: 5,
+    body: 1,
   },
 });
 

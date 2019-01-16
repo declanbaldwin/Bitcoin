@@ -193,42 +193,42 @@
                             </div>
                         </div>
                         <div class="postsScore">
+                        <% if(!token) { %>
+                            <div class="upArrow">
+                        <% } else if(posts.upvoters.includes(user._id.toHexString())) { %>
+                            <div class="upArrow red">
+                        <% } else { %>
+                            <div class="upArrow">
+                        <% } %>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 12 12"
+                                >
+                                    <g><path d="M1 8h10L6 3 1 8" /></g>
+                                </svg>
+                            </div>
+                            <p><%= posts.score %></p>
                             <% if(!token) { %>
-                                <div class="upArrow">
-                            <% } else if(posts.upvoters.includes(user._id.toHexString())) { %>
-                                <div class="upArrow red">
+                                <div class="downArrow">
+                            <% } else if(posts.downvoters.includes(user._id.toHexString())) { %>
+                                <div class="downArrow red">
                             <% } else { %>
-                                <div class="upArrow">
+                                <div class="downArrow">
                             <% } %>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 12 12"
-                                    >
-                                        <g><path d="M1 8h10L6 3 1 8" /></g>
-                                    </svg>
-                                </div>
-                                <p><%= posts.score %></p>
-                                <% if(!token) { %>
-                                    <div class="downArrow">
-                                <% } else if(posts.downvoters.includes(user._id.toHexString())) { %>
-                                    <div class="downArrow red">
-                                <% } else { %>
-                                    <div class="downArrow">
-                                <% } %>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 12 12"
-                                    >
-                                        <g><path d="M1 4h10L6 9 1 4" /></g>
-                                    </svg>
-                                </div>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 12 12"
+                                >
+                                    <g><path d="M1 4h10L6 9 1 4" /></g>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                     <% }); %>
                 </div>
                 <div class="searchPostsContainer">
                     <div class="postsHeader">Search Results</div>
-                    <div class="posts">
+                    <!-- <div class="posts">
                         <div class="postsBody" id="abc">
                             <p>Post Title</p>
                             <p>Pody Body</p>
@@ -257,7 +257,7 @@
                                     </svg>
                                 </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="newPostContainer">
                     <% if(token) { %>
