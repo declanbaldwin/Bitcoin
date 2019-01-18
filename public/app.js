@@ -162,23 +162,7 @@ $(document).ready(function() {
         </div>
     </div>
     <div class="postsScore">
-            <div class="upArrow">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 12 12"
-                >
-                    <g><path d="M1 8h10L6 3 1 8" /></g>
-                </svg>
-            </div>
-            <p>${data.posts[i].score}</p>
-            <div class="downArrow">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 12 12"
-                >
-                    <g><path d="M1 4h10L6 9 1 4" /></g>
-                </svg>
-            </div>
+        <p>${data.posts[i].score}</p>
     </div>
 </div>`;
       }
